@@ -16,7 +16,7 @@ require_once("database/conn.php") ;
         
 
         <?php $db = new Database(); ?>
-        <?php if (count($db->readData("products"))) : ?>
+        <?php if (count($db->readData())) : ?>
             <div class="col-sm-12">
                 <table class="table table-striped">
                     <thead class="table-dark">
@@ -33,7 +33,7 @@ require_once("database/conn.php") ;
                     </thead>
                     <tbody>
                         <?php // while ($row = mysqli_fetch_assoc($result)) : ?>
-                        <?php foreach ($db->readData("employees") as $row) : ?>
+                        <?php foreach ($db->readData() as $row) : ?>
                             <tr>
                                 <td><?php echo $row['id'];  ?></td>
                                 <td><?php echo $row['name'];  ?></td>

@@ -15,6 +15,9 @@ if (checkRequestMethod('POST')) {
     $category_id = $_POST['category_id'];
     $price = $_POST['price'];
     $file_name = $_FILES['image']['name'];
+    $file_temp_name = $_FILES['image']['tmp_name'];
+    $folder = '../images/' . $file_name ;
+    
 
     // Validation For Name  
     if (requireValue($name)) {
@@ -52,6 +55,7 @@ if (checkRequestMethod('POST')) {
                     WHERE `id`='$_GET[id]' ";
             $success['success'] = $db->updateData($sql);
             sessionStore('success', $success);
+            move_uploaded_file($file_temp_name, $folder);
             redirectPath("../edit-product.php?id=$_GET[id]");
         }else{
                  // if image not update

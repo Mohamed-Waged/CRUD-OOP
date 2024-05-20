@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h2 class="p-3 col text-center mt-5 text-white bg-secondary">
-                Welcome To Crud Opertion
+                Welcome To Market
             </h2>
         </div>
         <div class="col-6 mt-5 mx-auto d-flex justify-content-between">

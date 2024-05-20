@@ -11,7 +11,19 @@ require_once('core/functions.php');
     if(isset($_GET['id'])){
         $id = $_GET['id'];
         $db = new Database(); 
+        $categories = $db->getAllCategories();
         $row = $db->findData('products', $id);
+        // echo "<pre>";
+        // print_r($row);
+        // print_r($categories);
+        // foreach ($categories as $category ){
+        //     if ($row['category_id'] == $category['categ_id']) {
+        //         echo "select<br>";
+        //     }else{
+        //         echo "not<br>";
+        //     }
+        // }
+        // die;
 
         if(!$row){
             $errors = "Product Not Exists !";
@@ -25,7 +37,7 @@ require_once('core/functions.php');
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="p-3 col text-center mt-5 text-white bg-primary"> Edit Product </h2>
+                <h2 class="p-3 col text-center mt-5 text-white bg-warning text-dark rounded "> Edit Product </h2>
             </div>
 
 
@@ -59,7 +71,7 @@ require_once('core/functions.php');
             </div>
 
             <div class="col-sm-12">
-                <form method="post" action="handlers/editCategoryHandlers.php?id=<?php echo $row['id']; ?>" enctype="multipart/form-data">
+                <form method="post" action="handlers/editProductHandlers.php?id=<?php echo $row['id']; ?>" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" name="name" value="<?php echo $row['name']; ?>" class="form-control" id="name">
@@ -73,9 +85,9 @@ require_once('core/functions.php');
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Select Category Type</label>
                         <select class="form-control" name="category_id" id="exampleFormControlSelect1">
-                            <option value=''>Choose Category</option>
-                            <option value="1">Main Category</option>
-                            <option value="2">Sub Category</option>
+                            <?php foreach ($categories as $category ) : ?>
+                                <option <?= ($row['category_id'] == $category['categ_id'] ? "selected" : '') ?>  value='<?= $category['categ_id'] ; ?>'><?= $category['category_name'] ; ?></option>
+                            <?php endforeach ; ?>
                         </select>
                     </div>
 
@@ -90,7 +102,7 @@ require_once('core/functions.php');
                         <img class="rounded mt-2" src="images/<?php echo $row['image']?>" alt="" style="width: 200px;">
                     </div>
 
-                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="submit" class="btn btn-warning px-4">Edit</button>
                 </form>
             </div>
         </div>
